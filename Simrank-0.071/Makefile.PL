@@ -1,4 +1,4 @@
-use Inline::MakeMaker;
+use ExtUtils::MakeMaker;
 
 WriteMakefile(
     NAME              => 'String::Simrank',
