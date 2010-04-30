@@ -1,5 +1,5 @@
 package String::Simrank;
-$VERSION = '0.072';
+$VERSION = '0.073';
     # Note to developers:
     # enable the VERSIONs (here and in the "use Inline C ..."
     # statement) to match each other when ready to install in sitelib or
