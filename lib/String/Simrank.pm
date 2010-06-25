@@ -1,5 +1,5 @@
 package String::Simrank;
-$VERSION = '0.073';
+
     # Note to developers:
     # enable the VERSIONs (here and in the "use Inline C ..."
     # statement) to match each other when ready to install in sitelib or
@@ -15,16 +15,19 @@ use Fcntl;
 use Data::Dumper;
 use Storable;
 
+$VERSION = '0.074';
+
 # Must specify a NAME and VERSION parameter. The NAME must match your module's package
 # name. The VERSION parameter must match the module's $VERSION
 # variable and they must both be of the form /^\d\.\d\d$/.
 # DATA refers to the __DATA__ section near bottom of this file.
 use Inline C => 'DATA',
-           VERSION => '0.07',
+           VERSION => '0.074',
            NAME => 'String::Simrank';
            
 
 =head1 NAME
+
 String::Simrank - Rapid comparisons of many strings for k-mer similarity.
 =cut
 
@@ -41,6 +44,7 @@ $sr->formatdb( { wordlen => 6 } );
 =cut
 
 =head1 DESCRIPTION
+
 The String::Simrank module allows rapid searches for similarity between query
 strings and a database of strings.  This module is maintained by molecular
 biologists who use it for searching for similarities among strings representing
@@ -63,10 +67,10 @@ the database.  The format is query_id, tab, best match database_id, colon, perce
 second best match database_id, colon, percent similarity.
 query1  EscCol36:100.00 EscCol36:100.00 EscCol43:99.59  EscCol29:99.24  EscCol33:99.17  EscCol10:99.02 
 
-
 =cut
 
 =head1 METHODS
+
 =cut
 
 =head2 new( { data_path => $path })
@@ -91,6 +95,8 @@ base name but the .fasta will be substituted with .bin.
 Sequence names(identifiers) will be first 10 characters matched between the '>' and the first space character.
 Be sure the sequences names are unique within this string.
 
+=back
+
 =cut
 
 sub new {
@@ -106,6 +112,7 @@ sub new {
 }
 
 =head2 _check_arguments_for_new
+
 Internally used function.
 Validates the 'data' argument needed so this instance knows what data
 file will be linked. Method checks that fasta file exists and is readable 
@@ -115,6 +122,8 @@ Returns a hash or hash ref
 depending on the context of the method call.
 
 =cut
+
+
 sub _check_arguments_for_new {
     # Niels Larsen, May 2004.
     # Todd Z. DeSantis, March 2008.
@@ -171,8 +180,6 @@ sub _check_arguments_for_new {
 
 }
 
-
-
 =head2 formatdb({ wordlen => $int, minlen => $int, silent = $bool })
 
   $sr->formatdb({wordlen => 8, minlen => 500, silent = 0, valid_chars = 'ACGT'})
@@ -196,6 +203,7 @@ Parameters:
 =over 4
 
 =item pre_subst
+
 An integer that determines how to interpret some special characters in the strings.
 The substitution is done before k-mers are extracted.
 Use 1 to eliminate all periods(.), hypens(-), and space characters(\s, which includes
@@ -224,6 +232,7 @@ Default is undef (indicating all characters are valid)
 Specifies if caller wants progress messages printed to STDERR while formatting.
 Default is false, meaning not silent.
 
+=back
 
 =cut
 
@@ -471,6 +480,7 @@ sub formatdb {
     print "format binary file complete\n" unless ($cl_silent);
     return $seqnum;
 }
+
 =head2 _check_arguments_for_formatdb
 
 It checks that word length and minimum sequence length is reasonable.
@@ -481,6 +491,8 @@ Returns a hash or hash ref
 depending on the context of the method call.
 
 =cut
+
+
 sub _check_arguments_for_formatdb {
     # Niels Larsen, May 2004.
     # Todd Z. DeSantis, March 2008.
@@ -634,6 +646,8 @@ Default = false.  Meaning output is sent to STDOUT.
 
 Specifies if caller wants progress messages printed to STDERR while matching.
 Default is false, meaning not silent.
+
+=back
 
 =cut
 
@@ -911,6 +925,7 @@ sub match_oligos {
 }
 
 =head2 _check_arguments_for_match_oligos
+
 Internally used function.
 Validates the arguments for outlen, minpct, reverse,
 query, noids, silent, pre_subst and output.
@@ -1034,13 +1049,17 @@ sub _check_arguments_for_match_oligos {
     }
 
 }
+
 =head2 _create_oligos
+
 Internal method.
 Creates a list of unique words of a given length from a given sequence. 
 Enforces k-mers composed of purely valid_char if requested.
 Converts characters to upper case where possible.  This may become an option
-in the future.  
+in the future. 
+
 =cut
+
 
 sub _create_oligos {
     # Niels Larsen, November 2005.
@@ -1090,10 +1109,12 @@ sub _create_oligos {
 }
 
 =head2 _nearest_index
+
 Finds the index of a given sorted array where a given number
 would fit in the sorted order. The returned index can then
 be used to insert the number, for example. The array may 
 contain integers and/or floats, same for the number.
+
 =cut
 
 sub _nearest_index
@@ -1124,6 +1145,7 @@ sub _nearest_index
 1;
 
 =head2 _update_scores_C
+
 Receives a list of indicies, score vector, and the final index
 Updates the score vector by incrementing the oligo
   match count for the correct sequences.
@@ -1174,7 +1196,7 @@ void update_scores_C( SV* ndxstr, SV* scovec, int maxndx )
 /* helps test the InlineC connection. */
 int add(int x, int y) {
     return x + y;
-}    
+}
 
 int subtract(int x, int y) {
     return x - y;
