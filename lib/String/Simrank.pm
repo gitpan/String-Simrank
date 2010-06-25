@@ -14,17 +14,17 @@ use IO::File;
 use Fcntl;
 use Data::Dumper;
 use Storable;
+use vars qw($VERSION $NAME);
+
 
 $VERSION = '0.074';
+$NAME = 'String::Simrank';
 
 # Must specify a NAME and VERSION parameter. The NAME must match your module's package
 # name. The VERSION parameter must match the module's $VERSION
 # variable and they must both be of the form /^\d\.\d\d$/.
 # DATA refers to the __DATA__ section near bottom of this file.
-use Inline C => 'DATA',
-           VERSION => '0.074',
-           NAME => 'String::Simrank';
-           
+use Inline C => 'DATA';
 
 =head1 NAME
 
