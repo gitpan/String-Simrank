@@ -17,7 +17,7 @@ use Storable;
 use vars qw($VERSION $NAME);
 
 
-$VERSION = '0.074';
+$VERSION = '0.076';
 $NAME = 'String::Simrank';
 
 # Must specify a NAME and VERSION parameter. The NAME must match your module's package
