@@ -81,7 +81,7 @@ $sr->match_oligos({ query => 'test_data/mini_db.fasta',
 		    pre_subst => 2,
 		    outfile => 'test_data/mini_db.simout',
                    });
-ok( -s 'test_data/mini_db.simout' == 314, 'created outfile of expected size');      #12
+ok( (-s 'test_data/mini_db.simout' > 310 && -s 'test_data/mini_db.simout' < 325), 'created outfile of expected size');      #12
 
 
 ### now test the ability to sense and respond to long string identifiers:
