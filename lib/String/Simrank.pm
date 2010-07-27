@@ -17,7 +17,7 @@ use Storable;
 use vars qw($VERSION $NAME);
 
 
-$VERSION = '0.078';
+$VERSION = '0.079';
 $NAME = 'String::Simrank';
 
 # Must specify a NAME and VERSION parameter. The NAME must match your module's package
@@ -153,7 +153,7 @@ sub _check_arguments_for_new {
 	    }
             
         } else {
-            push @errors, qq (Input fasta data file not found or not readable -> "$cl_args->{'data'}");
+            push @errors, qq (Simrank.pm: Input fasta data file not found or not readable -> "$cl_args->{'data'}");
         }
         
     } else {
@@ -182,7 +182,7 @@ sub _check_arguments_for_new {
 
 =head2 formatdb({ wordlen => $int, minlen => $int, silent = $bool })
 
-  $sr->formatdb({wordlen => 8, minlen => 500, silent = 0, valid_chars = 'ACGT'})
+  $sr->formatdb({wordlen => 8, minlen => 500, silent => 0, valid_chars => 'ACGT'});
 
 From an input collection of strings (data), generates a binary file
 optimized for retrieval of k-mer similarities. The file will contain
